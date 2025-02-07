@@ -317,18 +317,19 @@ namespace ModernAppliances
         /// <summary>
         /// Generates random list of appliances
         /// </summary>
+
         public override void RandomList()
         {
             Console.WriteLine("Enter number of items: ");
 
             string? itemNum = Console.ReadLine();
-            int searchCount = Convert.ToInt16(itemNum);
+            int searchCount = Convert.ToInt32(itemNum);
 
             List<Appliance> found = new List<Appliance>();
 
             foreach (Appliance appliance in Appliances)
             {
-                found.Append(appliance);
+                found.Add(appliance);
             }
 
             found.Sort(new RandomComparer());
