@@ -17,7 +17,7 @@ namespace ModernAppliances
         public override void Checkout()
         {
             // Write "Enter the item number of an appliance: "
-            Console.WriteLine("Enter the item number of an appliance: ")
+            Console.WriteLine("Enter the item number of an appliance: ");
 
             // Create long variable to hold item number
             long itemNumber;
@@ -25,23 +25,34 @@ namespace ModernAppliances
             // Get user input as string and assign to variable.
             string UserInput = Console.ReadLine();
             // Convert user input from string to long and store as item number variable.
-            if (!long.TryParse(UserInput, out itemNumber))
-            {
-                Console.WriteLine("Please valid Number");
-            }
+            itemNumber = long.Parse(UserInput);
             // Create 'foundAppliance' variable to hold appliance with item number
             // Assign null to foundAppliance (foundAppliance may need to be set as nullable)
+            
             Appliance? foundAppliance = null;
 
             // Loop through Appliances
             // Test appliance item number equals entered item number
             // Assign appliance in list to foundAppliance variable
+            foreach (Appliance appliance in Appliances)
+            {
+                if (itemNumber == appliance.ItemNumber)
+                {
+                    foundAppliance = appliance;
+                    break;
+                } 
+            }
 
             // Break out of loop (since we found what need to)
 
 
             // Test appliance was not found (foundAppliance is null)
-                // Write "No appliances found with that item number."
+            // Write "No appliances found with that item number."
+            if (foundAppliance != null) 
+            {
+                Console.WriteLine("No appliances found with that item number");
+            }
+
             
 
             // Otherwise (appliance was found)
@@ -71,7 +82,7 @@ namespace ModernAppliances
 
 
             // Display found appliances
-            DisplayAppliancesFromList(found, 0);
+            //DisplayAppliancesFromList(found, 0);
         }
 
         /// <summary>
