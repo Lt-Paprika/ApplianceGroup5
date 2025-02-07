@@ -18,47 +18,57 @@ namespace ModernAppliances
         {
             // Write "Enter the item number of an appliance: "
             Console.WriteLine("Enter the item number of an appliance: ");
-
+        
             // Create long variable to hold item number
-            long itemNumber;
-
+            long itemNumberVar;
+        
             // Get user input as string and assign to variable.
             string UserInput = Console.ReadLine();
             // Convert user input from string to long and store as item number variable.
-            itemNumber = long.Parse(UserInput);
+            itemNumberVar = long.Parse(UserInput);
+        
             // Create 'foundAppliance' variable to hold appliance with item number
             // Assign null to foundAppliance (foundAppliance may need to be set as nullable)
             
             Appliance? foundAppliance = null;
-
+        
             // Loop through Appliances
             // Test appliance item number equals entered item number
             // Assign appliance in list to foundAppliance variable
             foreach (Appliance appliance in Appliances)
             {
-                if (itemNumber == appliance.ItemNumber)
+                if (itemNumberVar == appliance.ItemNumber)
                 {
                     foundAppliance = appliance;
                     break;
                 } 
             }
-
+        
             // Break out of loop (since we found what need to)
-
-
+        
+        
             // Test appliance was not found (foundAppliance is null)
             // Write "No appliances found with that item number."
             if (foundAppliance != null) 
             {
                 Console.WriteLine("No appliances found with that item number");
             }
-
-            
-
+            else
+            {
+                if (foundAppliance.IsAvailable)
+                {
+                    foundAppliance.Checkout();
+                    Console.WriteLine("Appliance has been checked out.");
+                }
+                else
+                {
+                    Console.WriteLine("The appliance is not available to be checked out.");
+                }
+            }   
             // Otherwise (appliance was found)
                 // Test found appliance is available
                     // Checkout found appliance
-
+        
                     // Write "Appliance has been checked out."
                 // Otherwise (appliance isn't available)
                     // Write "The appliance is not available to be checked out."
