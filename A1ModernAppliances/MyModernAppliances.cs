@@ -1,6 +1,9 @@
+using System.Runtime.CompilerServices;
+using Microsoft.VisualBasic;
 using ModernAppliances.Entities;
 using ModernAppliances.Entities.Abstract;
 using ModernAppliances.Helpers;
+using static ModernAppliances.Entities.Abstract.Appliance;
 
 namespace ModernAppliances
 {
@@ -17,48 +20,51 @@ namespace ModernAppliances
         public override void Checkout()
         {
             Console.WriteLine ("Enter the item number of an appliance:");
-            long itemSelection = 0;
+            long itemSelection;
+            string? item = Console.ReadLine();
+            itemSelection = Convert.ToInt64(item);
 
-            itemSelection = Convert.ToInt32(Console.ReadLine());
+            Appliance? foundAppliance = null;
 
-            var foundAppliance = null;
-            {
-                foreach (Appliance appliance in appliances)
+                foreach (Appliance appliance in Appliances)
                 {
-                    if (long itemSelection == appliance.itemNumber)
+                    if (itemSelection == appliance.ItemNumber)
                     {
                         foundAppliance = appliance;
-                        return foundAppliance;
+                        break;
                     }
 
                     else
                     {
-                        if (itemSelection != appliance.itemNumber);
-                        foundAppliance = null;
-                        return foundAppliance;
+                        if (itemSelection != appliance.ItemNumber)
+                        {
+                            foundAppliance = null;
+                        }
                     }
                 }
 
-                if (foundAppliance = null)
+                if (foundAppliance == null)
                 {
-                    Console.WriteLine ("No appliances found with that item number.")
+                    Console.WriteLine ("No appliances found with that item number.");
+                    return;
                 }
 
                 else
                 {
-                    IsAvailable(foundAppliance);
-                    if (IsAvailable = true)
+                    bool available = foundAppliance.IsAvailable;
+                    if (available == true)
                     {
-                        Checkout(foundAppliance);
+                        foundAppliance.Checkout();
                         Console.WriteLine("Appliance has been checked out.");
+                        return;
                     }
-                    else if (IsAvailable = false)
+                    else if (available == false)
                     {
                         Console.WriteLine ("The appliance isn't available to be checked out.");
+                        return;
                     }
 
                 }
-            }
         }
 
         /// <summary>
@@ -70,17 +76,17 @@ namespace ModernAppliances
 
             string? brandSearch = Console.ReadLine();
 
-            List<Appliance> found = newList<Appliance>();
-            foreach (Appliance appliance in appliances)
+            List<Appliance> found = new List<Appliance>();
+            foreach (Appliance appliance in Appliances)
             {
                 if (appliance.Brand == brandSearch)
                 {
-                    found.Append(appliance);
-                    return;
+                    found.Add(appliance);
                 }
             }
 
             DisplayAppliancesFromList(found, 0);
+            return;
         }
 
         /// <summary>
@@ -98,27 +104,27 @@ namespace ModernAppliances
             string? doorChoice = Console.ReadLine();
             int userDoors = Convert.ToInt16(doorChoice);
 
-            List<Refridgerator> found = new List<Refridgerator>();
+            List<Appliance> found = new List<Appliance>();
 
-            foreach (Appliance appliance in appliances)
+            foreach (Appliance appliance in Appliances)
             {
                 var typeCheck = DetermineApplianceTypeFromItemNumber(appliance.ItemNumber);
-                if (typeCheck == ApplianceTypes.Refridgerator)
+                if (typeCheck == ApplianceTypes.Refrigerator)
                 {
-                    Refridgerator refridgerator = (Refridgerator) appliance;
+                    Refrigerator refigerator = (Refrigerator) appliance;
                     if (userDoors == 0)
                     {
-                        found.Append(refridgerator);
+                        found.Add(refigerator);
                     }
-                    else if (refridgerator.Doors == userDoors)
+                    if (refigerator.Doors == userDoors)
                     {
-                        found.Append(refridgerator);
+                        found.Add(refigerator);
                     }
                 }
-                return;
             }
             /// Display found appliances
             DisplayAppliancesFromList(found, 0);
+            return;
             // DisplayAppliancesFromList(found, 0);
         }
 
@@ -135,21 +141,21 @@ namespace ModernAppliances
             Console.WriteLine("1 - 18 Volt");
             Console.WriteLine("2 - 24 Volt");
 
-            Console.WriteLine("Enter voltage:")
-            int voltageNum;
-            string voltageChoice = Console.Readline();
+            Console.WriteLine("Enter voltage:");
+            int voltageNum = 0;
+            string? voltage = Console.ReadLine();
 
-            if (voltageChoice == "0")
+            if (voltage == "0")
             {
                 voltageNum = 0;
             }
 
-            elif (voltageChoice == "1")
+            if (voltage == "1")
             {
                 voltageNum = 18;
             }
 
-            if (voltageChoice == "2")
+            if (voltage == "2")
             {
                 voltageNum = 24;
             }
@@ -159,25 +165,29 @@ namespace ModernAppliances
                 Console.WriteLine ("Invalid option.");
             }
             
-            List<Vacuum> found = new List<Vacuum>();
+            List<Appliance> found = new List<Appliance>();
 
-            foreach (Appliance vacuum in appliances)
+            foreach (Appliance appliance in Appliances)
             {
-                var applianceCheck = DetermineApplianceTypeFromItemNumber(appliance.itemNumber);
+                var applianceCheck = DetermineApplianceTypeFromItemNumber(appliance.ItemNumber);
                 if (applianceCheck == ApplianceTypes.Vacuum)
                 {
                     Vacuum vacuum = (Vacuum)appliance;
                     
-                    if ((DisplayVacuums.grade = null) or (DisplayVacuums.grade = vacuum.grade)) and ((voltageNum = 0) or (voltageNum = vacuum.Voltage))
+                    if (voltageNum == 0)
                     {
-                        found.Append(vacuum)
-                        return found;
+                        found.Add(vacuum);
+                    }
+                    if (voltageNum == vacuum.BatteryVoltage)
+                    {
+                            found.Add(vacuum);
                     }
                 }
             }
 
-            DisplayAppliancesFromList(found, 0);
             // Display found appliances
+            DisplayAppliancesFromList(found, 0);
+            return;
         }
 
         /// <summary>
@@ -193,7 +203,7 @@ namespace ModernAppliances
 
             Console.WriteLine("Enter room type:");
             string? roomInput = Console.ReadLine();
-            char roomSelect;
+            char roomSelect = 'A';
 
             if (roomInput == "0")
             {
@@ -211,32 +221,31 @@ namespace ModernAppliances
             else
             {
                 Console.WriteLine("Invalid Option");
-                return;
             }
 
-            List<Microwave> found = new List<Microwave>();
+            List<Appliance> found = new List<Appliance>();
 
-            foreach (Appliance appliance in appliances)
+            foreach (Appliance appliance in Appliances)
             {
-                var applianceCheck = DetermineApplianceTypeFromItemNumber(appliance.itemNumber);
+                var applianceCheck = DetermineApplianceTypeFromItemNumber(appliance.ItemNumber);
                 if (applianceCheck == ApplianceTypes.Microwave)
                 {
                     Microwave microwave = (Microwave)appliance;
 
-                    if (roomSelect == 'A');
+                    if (roomSelect == 'A')
                     {
-                        found.Append(microwave);
+                        found.Add(microwave);
                         return;
                     }
-                    if (microwave.roomType == roomSelect)
+                    if (roomSelect == microwave.RoomType)
                     {
-                        found.Append(microwave);
-                        return;
+                        found.Add(microwave);
                     }
                 }
             }
 
         DisplayAppliancesFromList(found, 0);
+        return;
         }
 
         /// <summary>
@@ -254,9 +263,9 @@ namespace ModernAppliances
 
             Console.WriteLine("Enter sound rating");
             string? soundInput = Console.ReadLine();
-            string soundChoice;
+            string soundChoice = "Any";
 
-            if (soundInput = "0")
+            if (soundInput == "0")
             {
                 soundChoice = "Any";
             }
@@ -279,33 +288,30 @@ namespace ModernAppliances
             else
             {
                 Console.WriteLine("Invalid option.");
-                return;
             }
 
-            List<Dishwasher> found = new List<Dishwasher>
+            List<Appliance> found = new List<Appliance>();
 
-            foreach (Appliance appliance in appliances)
+            foreach (Appliance appliance in Appliances)
             {
-                var applianceCheck = DetermineApplianceTypeFromItemNumber(appliance.itemNumber);
+                var applianceCheck = DetermineApplianceTypeFromItemNumber(appliance.ItemNumber);
                 if (applianceCheck == ApplianceTypes.Dishwasher)
                 {
                     Dishwasher dishwasher = (Dishwasher)appliance;
 
                     if (soundChoice == "Any")
                     {
-                        found.Append(dishwasher);
-                        return;
+                        found.Add(dishwasher);
                     }
-                    if (dishwasher.soundRating == soundchoice)
+                    if (dishwasher.SoundRating == soundChoice)
                     {
-                        found.Append(dishwasher);
-                        return;
+                        found.Add(dishwasher);
                     }
                 }
             }
 
-
             DisplayAppliancesFromList(found, 0);
+            return;
         }
 
         /// <summary>
@@ -315,12 +321,12 @@ namespace ModernAppliances
         {
             Console.WriteLine("Enter number of items: ");
 
-            string itemNum = Console.ReadLine();
+            string? itemNum = Console.ReadLine();
             int searchCount = Convert.ToInt16(itemNum);
 
             List<Appliance> found = new List<Appliance>();
 
-            foreach (Appliance appliance in appliances)
+            foreach (Appliance appliance in Appliances)
             {
                 found.Append(appliance);
             }
@@ -328,6 +334,7 @@ namespace ModernAppliances
             found.Sort(new RandomComparer());
 
             DisplayAppliancesFromList(found, searchCount);
+            return;
         }
     }
 }
