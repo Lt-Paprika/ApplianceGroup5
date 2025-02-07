@@ -25,7 +25,7 @@ namespace ModernAppliances
             {
                 foreach (Appliance appliance in appliances)
                 {
-                    if (long itemSelection = appliance.itemNumber)
+                    if (long itemSelection == appliance.itemNumber)
                     {
                         foundAppliance = appliance;
                         return foundAppliance;
@@ -66,16 +66,18 @@ namespace ModernAppliances
         /// </summary>
         public override void Find()
         {
-            Console.WriteLine ("Enter the brand to search for:")
+            Console.WriteLine ("Enter the brand to search for:");
 
-            string? brandSearch = Console.ReadLine()
+            string? brandSearch = Console.ReadLine();
 
             List<Appliance> found = newList<Appliance>();
             foreach (Appliance appliance in appliances)
             {
-                if appliance.Brand = brandSearch;
-                found.Append(appliance);
-                return found;
+                if (appliance.Brand == brandSearch)
+                {
+                    found.Append(appliance);
+                    return;
+                }
             }
 
             DisplayAppliancesFromList(found, 0);
@@ -100,8 +102,8 @@ namespace ModernAppliances
 
             foreach (Appliance appliance in appliances)
             {
-                typeCheck() = DetermineApplianceTypeFromItemNumber(appliance.ItemNumber)
-                if (typeCheck = ApplianceTypes.Refridgerator)
+                var typeCheck = DetermineApplianceTypeFromItemNumber(appliance.ItemNumber);
+                if (typeCheck == ApplianceTypes.Refridgerator)
                 {
                     Refridgerator refridgerator = (Refridgerator) appliance;
                     if (userDoors == 0)
@@ -113,7 +115,7 @@ namespace ModernAppliances
                         found.Append(refridgerator);
                     }
                 }
-                return found;
+                return;
             }
             /// Display found appliances
             DisplayAppliancesFromList(found, 0);
@@ -161,7 +163,7 @@ namespace ModernAppliances
 
             foreach (Appliance vacuum in appliances)
             {
-                applianceCheck() = DetermineApplianceTypeFromItemNumber(appliance.itemNumber);
+                var applianceCheck = DetermineApplianceTypeFromItemNumber(appliance.itemNumber);
                 if (applianceCheck == ApplianceTypes.Vacuum)
                 {
                     Vacuum vacuum = (Vacuum)appliance;
@@ -196,7 +198,7 @@ namespace ModernAppliances
             if (roomInput == "0")
             {
                 roomSelect = 'A';
-=            }
+            }
             if (roomInput == "1")
             {
                 roomSelect = 'K';
@@ -216,15 +218,20 @@ namespace ModernAppliances
 
             foreach (Appliance appliance in appliances)
             {
-                applianceCheck() = DetermineApplianceTypeFromItemNumber(appliance.itemNumber);
-                if (applianceCheck = ApplianceTypes.Microwave)
+                var applianceCheck = DetermineApplianceTypeFromItemNumber(appliance.itemNumber);
+                if (applianceCheck == ApplianceTypes.Microwave)
                 {
                     Microwave microwave = (Microwave)appliance;
 
-                    if (roomSelect == 'A' or (microwave.roomType = roomSelect))
+                    if (roomSelect == 'A');
                     {
-                        found.Append(microwave)
-                        return found;
+                        found.Append(microwave);
+                        return;
+                    }
+                    if (microwave.roomType == roomSelect)
+                    {
+                        found.Append(microwave);
+                        return;
                     }
                 }
             }
@@ -256,7 +263,6 @@ namespace ModernAppliances
             if (soundInput == "1")
             {
                 soundChoice = "Qt";
-                return soundChoice;
             }
             if (soundInput == "2")
             {
@@ -280,8 +286,8 @@ namespace ModernAppliances
 
             foreach (Appliance appliance in appliances)
             {
-                applianceCheck() = DetermineApplianceTypeFromItemNumber(appliance.itemNumber);
-                if (applianceCheck = ApplianceTypes.Dishwasher)
+                var applianceCheck = DetermineApplianceTypeFromItemNumber(appliance.itemNumber);
+                if (applianceCheck == ApplianceTypes.Dishwasher)
                 {
                     Dishwasher dishwasher = (Dishwasher)appliance;
 
