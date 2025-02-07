@@ -16,26 +16,24 @@ namespace ModernAppliances
         /// </summary>
         public override void Checkout()
         {
-            Console.WriteLine ("Enter the item number of an appliance:")
-            long itemSelection = 0
+            Console.WriteLine ("Enter the item number of an appliance:");
+            long itemSelection = 0;
 
             itemSelection = Convert.ToInt32(Console.ReadLine());
 
-            foundAppliance() = null
+            var foundAppliance = null;
             {
-                long applianceCheck () = itemSelection;
                 foreach (Appliance appliance in appliances)
                 {
-                    if (applianceCheck = appliance.itemNumber)
+                    if (long itemSelection = appliance.itemNumber)
                     {
                         foundAppliance = appliance;
                         return foundAppliance;
-                        Break;
                     }
 
                     else
                     {
-                        if appliance number != appliance.itemNumber;
+                        if (itemSelection != appliance.itemNumber);
                         foundAppliance = null;
                         return foundAppliance;
                     }
@@ -45,20 +43,22 @@ namespace ModernAppliances
                 {
                     Console.WriteLine ("No appliances found with that item number.")
                 }
-                Otherwise
+
+                else
                 {
                     IsAvailable(foundAppliance);
                     if (IsAvailable = true)
                     {
                         Checkout(foundAppliance);
-                        Console.WriteLine("Appliance has been checked out.")
+                        Console.WriteLine("Appliance has been checked out.");
                     }
                     else if (IsAvailable = false)
                     {
-                        Console.WriteLine ("The appliance isn't available to be checked out.")
+                        Console.WriteLine ("The appliance isn't available to be checked out.");
                     }
 
                 }
+            }
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace ModernAppliances
         {
             Console.WriteLine ("Enter the brand to search for:")
 
-            string brandSearch () = Console.ReadLine()
+            string? brandSearch = Console.ReadLine()
 
             List<Appliance> found = newList<Appliance>();
             foreach (Appliance appliance in appliances)
@@ -78,8 +78,7 @@ namespace ModernAppliances
                 return found;
             }
 
-            DisplayAppliancesFromList(found, 0)
-
+            DisplayAppliancesFromList(found, 0);
         }
 
         /// <summary>
@@ -94,10 +93,10 @@ namespace ModernAppliances
             Console.WriteLine("4 - Four doors");
 
             Console.WriteLine("Enter number of doors:");
-            string doorChoice () = Console.ReadLine();
-            int userDoors() = Convert.ToInt16(doorChoice);
+            string? doorChoice = Console.ReadLine();
+            int userDoors = Convert.ToInt16(doorChoice);
 
-            List<Refridgerator> found = new List<Refridgerator>
+            List<Refridgerator> found = new List<Refridgerator>();
 
             foreach (Appliance appliance in appliances)
             {
@@ -105,17 +104,16 @@ namespace ModernAppliances
                 if (typeCheck = ApplianceTypes.Refridgerator)
                 {
                     Refridgerator refridgerator = (Refridgerator) appliance;
-                    if (int userDoors = 0)
+                    if (userDoors == 0)
                     {
                         found.Append(refridgerator);
                     }
-                    else if (refridgerator.Doors = userDoors)
+                    else if (refridgerator.Doors == userDoors)
                     {
                         found.Append(refridgerator);
                     }
                 }
-
-                return found
+                return found;
             }
             /// Display found appliances
             DisplayAppliancesFromList(found, 0);
@@ -131,44 +129,40 @@ namespace ModernAppliances
         {
             Console.WriteLine("Possible options:");
 
-            Console.WriteLine("0 - Any")
-            Console.WriteLine("1 - 18 Volt")
-            Console.WriteLine("2 - 24 Volt")
+            Console.WriteLine("0 - Any");
+            Console.WriteLine("1 - 18 Volt");
+            Console.WriteLine("2 - 24 Volt");
 
             Console.WriteLine("Enter voltage:")
             int voltageNum;
             string voltageChoice = Console.Readline();
 
-            if (voltageChoice = "0")
+            if (voltageChoice == "0")
             {
-                int voltageNum = 0;
-                return voltageNum;
+                voltageNum = 0;
             }
 
-            elif (voltageChoice = "1")
+            elif (voltageChoice == "1")
             {
-                int voltageNum = 18;
-                return voltageNum;
+                voltageNum = 18;
             }
 
-            elif (voltageChoice = "2")
+            if (voltageChoice == "2")
             {
-                int voltageNum = 24;
-                return voltageNum;
+                voltageNum = 24;
             }
 
             else
             {
-                Console.WriteLine ("Invalid option.")
-                return;
+                Console.WriteLine ("Invalid option.");
             }
             
-            List<Vacuum> found = new List<Vacuum>
+            List<Vacuum> found = new List<Vacuum>();
 
-            foreach (Vacuum vacuum in appliances)
+            foreach (Appliance vacuum in appliances)
             {
                 applianceCheck() = DetermineApplianceTypeFromItemNumber(appliance.itemNumber);
-                if (applianceCheck = ApplianceTypes.Vacuum)
+                if (applianceCheck == ApplianceTypes.Vacuum)
                 {
                     Vacuum vacuum = (Vacuum)appliance;
                     
@@ -189,39 +183,36 @@ namespace ModernAppliances
         /// </summary>
         public override void DisplayMicrowaves()
         {
-            Console.WriteLine("Possible options:")
+            Console.WriteLine("Possible options:");
 
-            Console.WriteLine("0 - Any")
-            Console.WriteLine("1 - Kitchen")
-            Console.WriteLine("2 - Worksite")
+            Console.WriteLine("0 - Any");
+            Console.WriteLine("1 - Kitchen");
+            Console.WriteLine("2 - Worksite");
 
-            Console.WriteLine("Enter room type:")
-            string roomInput() = Console.ReadLine()
+            Console.WriteLine("Enter room type:");
+            string? roomInput = Console.ReadLine();
             char roomSelect;
 
-            if (roomInput = "0")
+            if (roomInput == "0")
             {
                 roomSelect = 'A';
-                return roomSelect;
-            }
-            if (roomInput = "1")
+=            }
+            if (roomInput == "1")
             {
                 roomSelect = 'K';
-                return roomSelect;
             }
-            if (roomInput = "2")
+            if (roomInput == "2")
             {
                 roomSelect = 'W';
-                return roomselect;
             }
 
             else
             {
-                Console.WriteLine("Invalid Option")
+                Console.WriteLine("Invalid Option");
                 return;
             }
 
-            List<Microwave> found = new List<Microwave>
+            List<Microwave> found = new List<Microwave>();
 
             foreach (Appliance appliance in appliances)
             {
@@ -230,7 +221,7 @@ namespace ModernAppliances
                 {
                     Microwave microwave = (Microwave)appliance;
 
-                    if (roomSelect = 'A' or (microwave.roomType = roomSelect))
+                    if (roomSelect == 'A' or (microwave.roomType = roomSelect))
                     {
                         found.Append(microwave)
                         return found;
@@ -246,46 +237,42 @@ namespace ModernAppliances
         /// </summary>
         public override void DisplayDishwashers()
         {
-            Console.WriteLine("Possible options:")
+            Console.WriteLine("Possible options:");
 
-            Console.WriteLine("0 - Any")
-            Console.WriteLine("1 - Quietest")
-            Console.WriteLine("2 - Quieter")
-            Console.WriteLine("3 - Quiet")
-            Console.WriteLine("4 - Moderate")
+            Console.WriteLine("0 - Any");
+            Console.WriteLine("1 - Quietest");
+            Console.WriteLine("2 - Quieter");
+            Console.WriteLine("3 - Quiet");
+            Console.WriteLine("4 - Moderate");
 
-            Console.WriteLine("Enter sound rating")
-            string soundInput() = Console.ReadLine()
+            Console.WriteLine("Enter sound rating");
+            string? soundInput = Console.ReadLine();
             string soundChoice;
 
             if (soundInput = "0")
             {
                 soundChoice = "Any";
-                return soundChoice;
             }
-            if (soundInput = "1")
+            if (soundInput == "1")
             {
                 soundChoice = "Qt";
                 return soundChoice;
             }
-            if (soundInput = "2")
+            if (soundInput == "2")
             {
                 soundChoice = "Qr";
-                return soundChoice;
             }
-            if (soundInput = "3")
+            if (soundInput == "3")
             {
                 soundChoice = "Qu";
-                return soundChoice;
             }
-            if (soundInput = "4")
+            if (soundInput == "4")
             {
                 soundChoice = "M";
-                return soundChoice;
             }
             else
             {
-                Console.WriteLine("Invalid option.")
+                Console.WriteLine("Invalid option.");
                 return;
             }
 
@@ -298,13 +285,19 @@ namespace ModernAppliances
                 {
                     Dishwasher dishwasher = (Dishwasher)appliance;
 
-                    if (soundChoice = "Any" or (dishwasher.soundRating = soundchoice))
+                    if (soundChoice == "Any")
                     {
-                        found.Append(dishwasher)
-                        return found;
+                        found.Append(dishwasher);
+                        return;
+                    }
+                    if (dishwasher.soundRating == soundchoice)
+                    {
+                        found.Append(dishwasher);
+                        return;
                     }
                 }
             }
+
 
             DisplayAppliancesFromList(found, 0);
         }
@@ -317,9 +310,9 @@ namespace ModernAppliances
             Console.WriteLine("Enter number of items: ");
 
             string itemNum = Console.ReadLine();
-            int searchCount = Convert.ToInt16(itemNum)
+            int searchCount = Convert.ToInt16(itemNum);
 
-            List<Appliance> found = new List<Appliance>
+            List<Appliance> found = new List<Appliance>();
 
             foreach (Appliance appliance in appliances)
             {
