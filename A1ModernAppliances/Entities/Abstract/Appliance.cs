@@ -8,6 +8,7 @@ namespace ModernAppliances.Entities.Abstract
         /// <summary>
         /// Types of appliances
         /// </summary>
+        public enum ApplianceTypes
         {
             Unknown,
             Refrigerator = 1,
@@ -97,14 +98,12 @@ namespace ModernAppliances.Entities.Abstract
         /// <summary>
         /// Constructor for appliance
         /// </summary>
-        public Appliance (long itemNumber, string brand, int quantity, decimal wattage, string color, decimal price)
-        ItemNumber = itemNumber;
-        Brand = brand;
-        Quantity = quantity;
-        Wattage = wattage;
-        Color = color;
-        Price = price;
-        
+        /// <param name="itemNumber">Item number</param>
+        /// <param name="brand">Brand</param>
+        /// <param name="quantity">Quantity</param>
+        /// <param name="wattage">Wattage</param>
+        /// <param name="color">Color</param>
+        /// <param name="price">Price</param>
         protected Appliance(long itemNumber, string brand, int quantity, decimal wattage, string color, decimal price)
         {
             this._itemNumber = itemNumber;
