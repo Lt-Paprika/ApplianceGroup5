@@ -1,7 +1,7 @@
 # ApplianceGroup5
 Group 5 project for appliance application CPRG211A
 Justin Penner, Eian Verastigue. Feb 07, 2025.
-Github Link: 
+Github Link: "https://github.com/Lt-Paprika/ApplianceGroup5"
 Program uses a Abstract class named Appliance as the base to create four different classes of appliances for a store program.
 
 The store program builds the inventory of each appliance from a list using different identifiers and stores them.
