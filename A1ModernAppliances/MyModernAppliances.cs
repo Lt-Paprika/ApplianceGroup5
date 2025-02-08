@@ -87,19 +87,29 @@ namespace ModernAppliances
         public override void Find()
         {
             // Write "Enter brand to search for:"
+            Console.WriteLine("Enter brand to searchfor:");
 
             // Create string variable to hold entered brand
+            string brand;
             // Get user input as string and assign to variable.
+            brand = Console.ReadLine() ?? string.Empty;
 
             // Create list to hold found Appliance objects
+            List<Appliance> found = new List<Appliance>();
 
             // Iterate through loaded appliances
             // Test current appliance brand matches what user entered
             // Add current appliance in list to found list
-
+            foreach (Appliance appliance in Appliances)
+            {
+                if (appliance.Brand == brand)
+                {
+                    found.Add(appliance);
+                }
+            }
 
             // Display found appliances
-            //DisplayAppliancesFromList(found, 0);
+            DisplayAppliancesFromList(found, 0);
         }
 
         /// <summary>
@@ -108,32 +118,58 @@ namespace ModernAppliances
         public override void DisplayRefrigerators()
         {
             // Write "Possible options:"
+            Console.WriteLine("Possible options: ");
 
             // Write "0 - Any"
+            Console.WriteLine("0 -Any");
             // Write "2 - Double doors"
+            Console.WriteLine("2 - Double doors");
             // Write "3 - Three doors"
+            Console.WriteLine("3 - Three doors");
             // Write "4 - Four doors"
-
+            Console.WriteLine("4 - Four doors");
             // Write "Enter number of doors: "
+            Console.WriteLine("Enter number of doors: ");
 
             // Create variable to hold entered number of doors
+            int numOfDoors;
 
             // Get user input as string and assign to variable
+            
 
             // Convert user input from string to int and store as number of doors variable.
-
+            
+            string? doorChoice = Console.ReadLine();
+            int userDoors = Convert.ToInt16(doorChoice);
             // Create list to hold found Appliance objects
+
+            List<Appliance> found = new List<Appliance>();
 
             // Iterate/loop through Appliances
             // Test that current appliance is a refrigerator
             // Down cast Appliance to Refrigerator
             // Refrigerator refrigerator = (Refrigerator) appliance;
-
+            foreach (Appliance appliance in Appliances)
+            {
+                var typeCheck = DetermineApplianceTypeFromItemNumber(appliance.ItemNumber);
+                if (typeCheck == ApplianceTypes.Refrigerator)
+                {
+                    Refrigerator refigerator = (Refrigerator)appliance;
+                    if (userDoors == 0)
+                    {
+                        found.Add(refigerator);
+                    }
+                    if (refigerator.Doors == userDoors)
+                    {
+                        found.Add(refigerator);
+                    }
+                }
+            }
             // Test user entered 0 or refrigerator doors equals what user entered.
             // Add current appliance in list to found list
 
             // Display found appliances
-            // DisplayAppliancesFromList(found, 0);
+            DisplayAppliancesFromList(found, 0);
         }
 
         /// <summary>
