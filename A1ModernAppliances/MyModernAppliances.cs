@@ -234,7 +234,7 @@ namespace ModernAppliances
             // Vacuum vacuum = (Vacuum)appliance;
             foreach (Appliance appliance in Appliances)
             {
-                if (appliance is Vacuum vacuum) // Proper type check and downcasting
+                if (appliance is Vacuum vacuum)
                 {
                     if (voltage == 0 || voltage == vacuum.BatteryVoltage)
                     {
@@ -256,17 +256,20 @@ namespace ModernAppliances
         public override void DisplayMicrowaves()
         {
             // Write "Possible options:"
+            Console.WriteLine("Possible options:");
 
             // Write "0 - Any"
             // Write "1 - Kitchen"
             // Write "2 - Work site"
-
+            Console.WriteLine("0 - Any");
+            Console.WriteLine("1 - Kitchen");
+            Console.WriteLine("2 - Work site");
             // Write "Enter room type:"
-
+            Console.WriteLine("Enter room type:");
             // Get user input as string and assign to variable
-
+            string? UserInput = Console.ReadLine();
             // Create character variable that holds room type
-
+            char roomType = 'A';
             // Test input is "0"
             // Assign 'A' to room type variable
             // Test input is "1"
@@ -278,17 +281,42 @@ namespace ModernAppliances
             // Return to calling method
             // return;
 
+            if (UserInput == "0")
+            {
+                roomType = 'A';
+            }
+            else if (UserInput == "1")
+            {
+                roomType = 'k';
+            }
+            else if (UserInput == "2")
+            {
+                roomType = 'W';
+            }
+            else
+            {
+                Console.WriteLine("Invalid option");
+            }
             // Create variable that holds list of 'found' appliances
-
+            List<Appliance> found = new List<Appliance>();
             // Loop through Appliances
             // Test current appliance is Microwave
             // Down cast Appliance to Microwave
 
             // Test room type equals 'A' or microwave room type
             // Add current appliance in list to found list
-
+            foreach (Appliance appliance in Appliances)
+            {
+                if (appliance is Microwave microwave)
+                {
+                    if (roomType == 'A' || roomType == microwave.RoomType)
+                    {
+                        found.Add(microwave);
+                    }
+                }
+            }
             // Display found appliances
-            // DisplayAppliancesFromList(found, 0);
+            DisplayAppliancesFromList(found, 0);
         }
 
         /// <summary>
@@ -297,18 +325,27 @@ namespace ModernAppliances
         public override void DisplayDishwashers()
         {
             // Write "Possible options:"
+            Console.WriteLine("Possible options:");
 
             // Write "0 - Any"
             // Write "1 - Quietest"
             // Write "2 - Quieter"
             // Write "3 - Quiet"
             // Write "4 - Moderate"
+            Console.WriteLine("0 - Any");
+            Console.WriteLine("1 - Quietest");
+            Console.WriteLine("2 - Quieter");
+            Console.WriteLine("3 - Quiet");
+            Console.WriteLine("4 - Moderate");
 
             // Write "Enter sound rating:"
+            Console.WriteLine("Enter sound rating: ");
 
             // Get user input as string and assign to variable
+            string? UserInput = Console.ReadLine();
 
             // Create variable that holds sound rating
+            string soundRating = "Any";
 
             // Test input is "0"
             // Assign "Any" to sound rating variable
@@ -323,18 +360,54 @@ namespace ModernAppliances
             // Otherwise (input is something else)
             // Write "Invalid option."
             // Return to calling method
+            if (UserInput == "0")
+            {
+                soundRating = "Any"; 
+            }
+            else if (UserInput == "1")
+            {
+                soundRating = "Qt"; 
+            }
+            else if (UserInput == "2")
+            {
+                soundRating = "Qr"; 
+            }
+            else if (UserInput == "3")
+            {
+                soundRating = "Qu"; 
+            }
+            else if (UserInput == "4")
+            {
+                soundRating = "M"; 
+            }
+            else
+            {
+                Console.WriteLine("Invalid option.");
+                return; 
+            }
 
             // Create variable that holds list of found appliances
+            List<Appliance> found = new List<Appliance>();
 
             // Loop through Appliances
             // Test if current appliance is dishwasher
             // Down cast current Appliance to Dishwasher
+            foreach (Appliance appliance in Appliances)
+            {
+                if (appliance is Dishwasher dishwasher) 
+                {
+                    if (soundRating == "Any" || soundRating == dishwasher.SoundRating) 
+                    {
+                        found.Add(dishwasher);
+                    }
+                }
+            }
 
             // Test sound rating is "Any" or equals soundrating for current dishwasher
             // Add current appliance in list to found list
 
             // Display found appliances (up to max. number inputted)
-            // DisplayAppliancesFromList(found, 0);
+            DisplayAppliancesFromList(found, 0);
         }
 
         /// <summary>
@@ -346,19 +419,26 @@ namespace ModernAppliances
             Console.Write("Enter number of items: ");
 
             // Get user input as string and assign to variable
+            string UserInput = Console.ReadLine();
+
+            // Declare num before using it
+            int num;
 
             // Convert user input from string to int
+            if (!int.TryParse(UserInput, out num) || num <= 0)
+            {
+                Console.WriteLine("Invalid number. Please enter a positive integer.");
+                return;
+            }
 
-            // Create variable to hold list of found appliances
+            // Create a list to hold all appliances
+            List<Appliance> found = new List<Appliance>(Appliances);
 
-            // Loop through appliances
-            // Add current appliance in list to found list
-
-            // Randomize list of found appliances
-            // found.Sort(new RandomComparer());
+            // Randomize the list of found appliances
+            found.Sort(new RandomComparer());
 
             // Display found appliances (up to max. number inputted)
-            // DisplayAppliancesFromList(found, num);
+            DisplayAppliancesFromList(found, num);
         }
     }
 }
