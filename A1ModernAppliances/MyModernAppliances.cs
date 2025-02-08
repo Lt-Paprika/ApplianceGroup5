@@ -183,15 +183,37 @@ namespace ModernAppliances
             Console.WriteLine("Possible options:");
 
             // Write "0 - Any"
+            Console.WriteLine("0 - Any");
             // Write "1 - 18 Volt"
+            Console.WriteLine("1 - 18");
             // Write "2 - 24 Volt"
+            Console.WriteLine("2 - 24");
 
             // Write "Enter voltage:"
-
+            Console.WriteLine("Enter Voltage: ");
             // Get user input as string
+            string? UserInput = Console.ReadLine();
             // Create variable to hold voltage
-
+            int voltage;
             // Test input is "0"
+            if (UserInput == "0")
+            {
+                voltage = 0;
+            }
+            else if (UserInput == "1")
+            {
+                voltage = 18;
+            }
+            else if (UserInput == "2")
+            {
+                voltage = 24;
+            }
+            else
+            {
+                Console.WriteLine("Invalid Option");
+                return;
+            }
+
             // Assign 0 to voltage
             // Test input is "1"
             // Assign 18 to voltage
@@ -204,16 +226,28 @@ namespace ModernAppliances
 
             // Create found variable to hold list of found appliances.
 
+            List<Appliance> found = new List<Appliance>();
+
             // Loop through Appliances
             // Check if current appliance is vacuum
             // Down cast current Appliance to Vacuum object
             // Vacuum vacuum = (Vacuum)appliance;
+            foreach (Appliance appliance in Appliances)
+            {
+                if (appliance is Vacuum vacuum) // Proper type check and downcasting
+                {
+                    if (voltage == 0 || voltage == vacuum.BatteryVoltage)
+                    {
+                        found.Add(vacuum);
+                    }
+                }
+            }
 
             // Test grade is "Any" or grade is equal to current vacuum grade and voltage is 0 or voltage is equal to current vacuum voltage
             // Add current appliance in list to found list
 
             // Display found appliances
-            // DisplayAppliancesFromList(found, 0);
+            DisplayAppliancesFromList(found, 0);
         }
 
         /// <summary>
